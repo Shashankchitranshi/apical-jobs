@@ -48,3 +48,7 @@ $(window).scroll(function() {
     }
 });
 //Header Scroll Functionality****end*****
+
+$(".terms-agreement input").click(function() {
+    $(this).toggleClass("checked")
+})
