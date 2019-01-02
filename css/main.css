@@ -1031,3 +1031,16 @@ section.upcoming h3 {
     display: inline-block;
     padding: 5px 10px;
 }
+
+#contact-us .form-error , #refer-us .form-error{
+    color: #ea7f23;
+}
+.response{
+    background: #fff;
+}
+.response.alert-primary{
+    color: green;
+}
+.response.alert-danger{
+    color: red;
+}
