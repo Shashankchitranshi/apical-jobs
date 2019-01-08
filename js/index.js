@@ -38,6 +38,13 @@ $(window).scroll(function() {
         } else {
             $(".headercolor").removeClass("blueHeader");
         }
+    } else if (screen.width > 767 || screen.width <= 991) {
+        $(".blue-header").addClass("blueHeader")
+        if (scroll >= 150) {
+            $(".headercolor").addClass("blueHeader");
+        } else {
+            $(".headercolor").removeClass("blueHeader");
+        }
     } else {
         $(".blue-header").addClass("blueHeader")
         if (scroll >= 400) {
@@ -50,5 +57,17 @@ $(window).scroll(function() {
 //Header Scroll Functionality****end*****
 
 $(".terms-agreement input").click(function() {
-    $(this).toggleClass("checked")
-})
+        $(this).toggleClass("checked")
+    })
+    // Choose file
+
+$('#chooseFile').bind('change', function() {
+    var filename = $("#chooseFile").val();
+    if (/^\s*$/.test(filename)) {
+        $(".file-upload").removeClass('active');
+        $("#noFile").text("No file chosen...");
+    } else {
+        $(".file-upload").addClass('active');
+        $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+    }
+});

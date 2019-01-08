@@ -5,47 +5,45 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aster Volunteer</title>
+    <title>We are HERE! &#8211; Help us to help you</title>
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/OwlCarousel/owl.carousel.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css" rel="stylesheet"
-        type="text/css" />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css" rel="stylesheet" type="text/css" /> -->
 </head>
 
 <body>
     <header>
-        <header>
-            <nav class="navbar navbar-default navbar-fixed-top blueHeader">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                            aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.html"><img src="images/layer-851.png" alt=""></a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="about-us.html">About </a></li>
-                            <li><a href="why-us.html">Why Us</a></li>
-                            <li><a href="choose-job.html">Choose a job</a></li>
-                            <li><a href="faq.html">FAQs</a></li>
-                            <li><a class="active" href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
+        <nav class="navbar navbar-default navbar-fixed-top headercolor">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <p>Apical Jobs</p>
+                    </a>
                 </div>
-            </nav>
-        </header>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="about-us.html">About </a></li>
+                        <li><a href="why-us.html">Why Us</a></li>
+                        <li><a href="choose-job.html">Choose a job</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a class="active" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
-    <section class="register-now margin-top">
+    <section class="register-now">
         <div class="img-corousel">
             <img src="images/contact-us.jpeg" alt="">
+            <div class="image-opacity"></div>
         </div>
     </section>
     <div class="become-volunteer bg-white">
@@ -53,31 +51,41 @@
             <h2 class="margintop">Contact Us</h2>
             <form action="" method="POST" id="contact-us">
                 <div class="row text-left">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="">Name<span>*</span></label>
-                            <input type="text" name="fullname" class="form-control" 
-                            data-validation="required length custom" 
-                            data-validation-regexp="^([a-zA-Z][a-zA-Z ]+)$" 
-                            data-validation-length="min2"
-                            data-validation-error-msg-required="Please Enter your Full Name ">
+                            <input type="text" name="fullname" class="form-control" data-validation="required length custom" data-validation-regexp="^([a-zA-Z][a-zA-Z ]+)$" data-validation-length="min2" data-validation-error-msg-required="Please Enter your Full Name ">
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="">Contact No.<span>*</span></label>
-                            <input type="text" name="phone" class="form-control" id="phone-mask" data-validation="required" 
-                            data-validation-error-msg-required="Please Enter your Contact Number ">
+                            <input type="text" name="phone" class="form-control" id="phone-mask" data-validation="required" data-validation-error-msg-required="Please Enter your Contact Number ">
                         </div>
                     </div>
                 </div>
-                <div class="form-group text-left">
-                    <label for="">Email Id<span>*</span></label>
-                    <input type="email" name="email" class="form-control" 
-                    data-validation="required email">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-6">
+                        <div class="form-group text-left">
+                            <label for="">Email Id<span>*</span></label>
+                            <input type="email" name="email" class="form-control" data-validation="required email">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-sm-6">
+                        <div class="form-group text-left">
+                            <label for="">Resume<span>*</span></label>
+                            <div class="file-upload">
+                                <div class="file-select">
+                                    <div class="file-select-button" id="fileName">Choose File</div>
+                                    <div class="file-select-name" id="noFile">No file chosen...</div>
+                                    <input type="file" name="chooseFile" id="chooseFile">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row text-left">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="">Qualification<span>*</span></label>
                             <select class="form-control" name="qualification" data-validation="required" data-validation-error-msg-required="Please Select your Highest Qualification ">
@@ -89,7 +97,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="">Work Experience<span>*</span></label>
                             <select class="form-control" name="experience" data-validation="required" data-validation-error-msg-required="Please Select Your Work Experience ">
@@ -104,50 +112,38 @@
                     </div>
                 </div>
                 <div class="row text-left">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="">Salary Expectation</label>
-                            <input type="text" name="salary" class="form-control" 
-                            data-validation="alphanumeric" 
-                            data-validation-allowing=". -"
-                            data-validation-optional="true"
-                            data-validation-error-msg-alphanumeric="Please Enter your Expected Salary ">
+                            <input type="text" name="salary" class="form-control" data-validation="alphanumeric" data-validation-allowing=". -" data-validation-optional="true" data-validation-error-msg-alphanumeric="Please Enter your Expected Salary ">
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group">
                             <label for="">Previous Employer</label>
-                            <input type="text" name="employer" class="form-control" 
-                            data-validation="length custom" 
-                            data-validation-regexp="^([a-zA-Z][a-zA-Z ]+)$" 
-                            data-validation-length="min2" 
-                            data-validation-optional="true" 
-                            data-validation-error-msg-length="Please Enter your previous Employed Company or type NA ">
+                            <input type="text" name="employer" class="form-control" data-validation="length custom" data-validation-regexp="^([a-zA-Z][a-zA-Z ]+)$" data-validation-length="min2" data-validation-optional="true" data-validation-error-msg-length="Please Enter your previous Employed Company or type NA ">
                         </div>
                     </div>
                 </div>
                 <div class="terms-agreement text-left">
                     <p>
-                        <input type="checkbox" id="test2"  data-validation="required" 
-                        data-validation-error-msg="You have to agree to our terms" />
+                        <input type="checkbox" id="test2" data-validation="required" data-validation-error-msg="You have to agree to our terms" />
                         <label for="test2">I agree I have not been charged any amount for the services </label>
                     </p>
                 </div>
                 <div class=" text-left">
-                    <button class="btn btn-default register" type="submit">Register</button>
+                    <a href="thank-you.html"><button class="btn btn-default register" type="submit">Register</button></a>
                     <span><a class="referal" href="referal.html">I have Referral</a></span>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="alert response" style="display:none" role="alert">
-                            
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
     </section>
     <footer class="footer">
         <div class="social-icons">
@@ -161,19 +157,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="assets/OwlCarousel/owl.carousel.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.79/jquery.form-validator.min.js"></script>
     <script src="https://unpkg.com/imask"></script>
     <script src="js/index.js"></script>
     <script>
         var phoneMask = new IMask(
             document.getElementById('phone-mask'), {
-            mask: '+{91}-0000000000'
-        });
+                mask: '+{91}-0000000000'
+            });
         phoneMask.updateValue();
-        
+
         $.validate({
-            form : '#contact-us',
-            onSuccess : function($form) {
+            form: '#contact-us',
+            onSuccess: function($form) {
                 var str = $('#contact-us').serializeArray();
                 var action = 'contactform/contactform.php';
                 $.ajax({
@@ -184,25 +180,25 @@
                         msg = JSON.parse(msg);
                         if (msg.code == 'success') {
                             $(".response").html("Your form has been submitted successfully");
-                            if($(".response").hasClass('alert-danger')){
+                            if ($(".response").hasClass('alert-danger')) {
                                 $(".response").removeClass("alert-danger");
                             }
                             $(".response").show();
                             $(".response").addClass("alert-primary");
                             $('#contact-us').reset();
-                        } else if (msg.code == 'failed'){
+                        } else if (msg.code == 'failed') {
                             $(".response").html("Something Went Wrong");
-                            if($(".response").hasClass('alert-primary')){
+                            if ($(".response").hasClass('alert-primary')) {
                                 $(".response").removeClass("alert-primary");
                             }
                             $(".response").show();
                             $(".response").addClass("alert-danger");
-                           
+
                         }
                     }
                 });
                 return false;
-                 // Will stop the submission of the form
+                // Will stop the submission of the form
             },
         });
     </script>
