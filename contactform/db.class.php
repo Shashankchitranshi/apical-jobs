@@ -4,7 +4,7 @@
 Author: Deepanshu Srivastava
 Description: database Wrapper
 Version: 0.1
-*/
+ */
 
 class Database {
 	public $conn;
@@ -24,7 +24,7 @@ class Database {
 		$this->conn = false;
 		$this->host = 'localhost';
 		$this->user = 'root';
-		$this->password = '';
+		$this->password = 'root';
 		$this->dbname = 'apical';
 		$this->port = '3306';
 		$this->debug = true;
@@ -46,7 +46,7 @@ class Database {
 				$this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbname . '', $this->user, $this->password, array(
 					PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
 				));
-				$this->conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
+				$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 			} catch (Exception $e) {
 				die('Error : ' . $e->getMessage());
 			}
@@ -210,7 +210,7 @@ class Database {
 			die();
 		}
 		$result->setFetchMode(PDO::FETCH_ASSOC);
-		return  $this->conn->lastInsertId();;
+		return $this->conn->lastInsertId();
 	}
 
 	/**
@@ -223,7 +223,7 @@ class Database {
 	 * @return     boolean  ( description_of_the_return_value )
 	 */
 	public function getData($table_name, $condition) {
-		$query = "SELECT * FROM " . $table_name .  " WHERE " . $this->bindFieldsWhere($condition);
+		$query = "SELECT * FROM " . $table_name . " WHERE " . $this->bindFieldsWhere($condition);
 		$params = array();
 		foreach ($condition as $key => $value) {
 			$params[$key] = $value;
@@ -241,7 +241,6 @@ class Database {
 		$reponse = $result->fetch();
 		return $reponse;
 	}
-
 
 	/**
 	 * update
@@ -294,6 +293,6 @@ class Database {
 		$reponse = $result->fetch();
 		return true;
 	}
-	
+
 }
 ?>
