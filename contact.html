@@ -51,7 +51,7 @@
     <div class="become-volunteer bg-white">
         <div class="become-volunteer-width bg-blue">
             <h2 class="margintop">Contact Us</h2>
-            <form action="" method="POST" id="contact-us">
+            <form action="" method="POST" id="contact-us" enctype="multipart/form-data">
                 <div class="row text-left">
                     <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group">
@@ -76,13 +76,25 @@
                     <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group text-left">
                             <label for="">Resume<span>*</span></label>
-                            <div class="file-upload">
-                                <div class="file-select">
+                            <!--<div class="file-upload">
+                                 <div class="file-select">
                                     <div class="file-select-button" id="fileName">Choose File</div>
                                     <div class="file-select-name" id="noFile">No file chosen...</div>
-                                    <input type="file" name="chooseFile" id="chooseFile">
-                                </div>
-                            </div>
+                                    <input type="file" name="chooseFile" class="form-control" id="chooseFile" data-validation="required" 
+                                    data-validation-error-msg-required="No file selected"
+                                    >
+                                </div> 
+                            </div>-->
+                            <input type="file" name="chooseFile" class="filestyle " data-buttonBefore="true" data-btnClass="upload-btn" id="chooseFile" data-validation="required mime size " 
+                            data-validation-max-size="1M"
+                            data-dragdrop="true"
+                            data-disabled="false"
+                            data-placeholder="No file Chosen"
+                            data-validation-allowing="doc, docx, pdf" 
+                            data-validation-error-msg-required="You have not selected any file to upload" 
+                            data-validation-error-msg-size="You can not upload file larger than 1MB"
+                            data-validation-error-msg-mime="You can only upload pdf and word file"
+                            >
                         </div>
                     </div>
                 </div>
@@ -156,13 +168,17 @@
 
         </div>
     </footer>
+
+    <div id="loader"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="assets/OwlCarousel/owl.carousel.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.79/jquery.form-validator.min.js"></script>
     <script src="https://unpkg.com/imask"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/2.1.0/bootstrap-filestyle.min.js"></script>
     <script src="js/index.js"></script>
     <script>
+        var spinner = $('#loader');
         var phoneMask = new IMask(
             document.getElementById('phone-mask'), {
                 mask: '+{91}-0000000000'
@@ -170,24 +186,27 @@
         phoneMask.updateValue();
 
         $.validate({
+            modules : 'file',
             form: '#contact-us',
             onSuccess: function($form) {
-                var str = $('#contact-us').serializeArray();
+               // formData = new FormData($('#contact-us'));
+               spinner.show();
+                var str = new FormData($('#contact-us')[0]);
                 var action = 'contactform/contactform.php';
                 $.ajax({
                     type: "POST",
                     url: action,
                     data: str,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
                     success: function(msg) {
                         msg = JSON.parse(msg);
+                        spinner.hide();
                         if (msg.code == 'success') {
                             $(".response").html("Your form has been submitted successfully");
-                            if ($(".response").hasClass('alert-danger')) {
-                                $(".response").removeClass("alert-danger");
-                            }
-                            $(".response").show();
-                            $(".response").addClass("alert-primary");
-                            $('#contact-us').reset();
+                            window.location.replace("thank-you.html");
+                            document.getElementById("contact-us").reset();
                         } else if (msg.code == 'failed') {
                             $(".response").html("Something Went Wrong");
                             if ($(".response").hasClass('alert-primary')) {

@@ -54,7 +54,7 @@
             <div class="detail-info text-left">
                 <h4>Your Details</h4>
             </div>
-            <form action="" method="POST" id="refer-us">
+            <form action="" method="POST" id="refer-us" enctype="multipart/form-data">
                 <div class="row text-left">
                     <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group">
@@ -100,13 +100,23 @@
                     <div class="col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group text-left">
                             <label for="">Resume<span>*</span></label>
-                            <div class="file-upload">
+                            <!-- <div class="file-upload">
                                 <div class="file-select">
                                     <div class="file-select-button" id="fileName">Choose File</div>
                                     <div class="file-select-name" id="noFile">No file chosen...</div>
                                     <input type="file" name="chooseFile" id="chooseFile">
                                 </div>
-                            </div>
+                            </div> -->
+                            <input type="file" name="chooseFile" class="filestyle " data-buttonBefore="true" data-btnClass="upload-btn" id="chooseFile" data-validation="required mime size " 
+                            data-validation-max-size="1M"
+                            data-dragdrop="true"
+                            data-disabled="false"
+                            data-placeholder="No file Chosen"
+                            data-validation-allowing="doc, docx, pdf" 
+                            data-validation-error-msg-required="You have not selected any file to upload" 
+                            data-validation-error-msg-size="You can not upload file larger than 1MB"
+                            data-validation-error-msg-mime="You can only upload pdf and word file"
+                            >
                         </div>
                     </div>
                 </div>
@@ -179,13 +189,16 @@
 
         </div>
     </footer>
+    <div id="loader"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="assets/OwlCarousel/owl.carousel.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.79/jquery.form-validator.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/2.1.0/bootstrap-filestyle.min.js"></script>
     <script src="https://unpkg.com/imask"></script>
     <script src="js/index.js"></script>
     <script>
+        var spinner = $('#loader');
         var phoneMask = new IMask(
             document.getElementById('phone-mask'), {
                 mask: '+{91}-0000000000'
@@ -197,24 +210,26 @@
         phoneMask.updateValue();
 
         $.validate({
+            modules : 'file',
             form: '#refer-us',
             onSuccess: function($form) {
-                var str = $('#refer-us').serializeArray();
+                spinner.show();
+                var str = new FormData($('#refer-us')[0]);
                 var action = 'contactform/refer.php';
                 $.ajax({
                     type: "POST",
                     url: action,
                     data: str,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
                     success: function(msg) {
                         msg = JSON.parse(msg);
+                        spinner.hide();
                         if (msg.code == 'success') {
                             $(".response").html("Your form has been submitted successfully");
-                            if ($(".response").hasClass('alert-danger')) {
-                                $(".response").removeClass("alert-danger");
-                            }
-                            $(".response").show();
-                            $(".response").addClass("alert-primary");
-                            $('#contact-us').reset();
+                            window.location.replace("thank-you.html");
+                            document.getElementById("refer-us").reset();
                         } else if (msg.code == 'failed') {
                             $(".response").html("Something Went Wrong");
                             if ($(".response").hasClass('alert-primary')) {
