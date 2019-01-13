@@ -23,9 +23,9 @@ class Database {
 	function __construct($params = array()) {
 		$this->conn = false;
 		$this->host = 'localhost';
-		$this->user = 'root';
-		$this->password = 'root';
-		$this->dbname = 'apical';
+		$this->user = 'webgeekl_admin';
+		$this->password = 'Deepu@24';
+		$this->dbname = 'webgeekl_apical';
 		$this->port = '3306';
 		$this->debug = true;
 		$this->connect();

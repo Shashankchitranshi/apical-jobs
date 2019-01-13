@@ -1,6 +1,7 @@
 <?php
-//  error_reporting(E_ALL);
-//  ini_set('display_errors', 1);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 $url = "";
 $info = pathinfo($_SERVER['REQUEST_URI']);
 $path = '//' . $_SERVER['HTTP_HOST'] . $info['dirname'] . '/';
@@ -88,80 +89,85 @@ if (!empty($_POST)) {
 	}
 
 	if (empty($error_fields)) {
-		$to = 'srivastava.deepanshu24@gmail.com';
+		$to = 'chitranshi.shashank74@gmail.com';
 
-    require (dirname(__FILE__) . '/phpmailer/class.phpmailer.php');
-    require (dirname(__FILE__) . '/phpmailer/class.smtp.php');
+		//sender
+		$from = $data["referred_by_email"];
+		$fromName = $data["referred_by"];
 
-    $mail = new PHPMailer();
-      //Server settings
-      $mail->SMTPDebug = 0; // Enable verbose debug output
-      $mail->isSMTP(); // Set mailer to use SMTP
-      $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-      $mail->SMTPAuth = true; // Enable SMTP authentication
-      $mail->Username = $to; // SMTP username
-      $mail->Password = 'Deepanshu@24'; // SMTP password
-      $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
-      $mail->Port = 587; // TCP port to connect to
+		//email subject
+		$subject = 'Submission from ' . $data['referred_by'];
 
-      //Recipients
-      $mail->setFrom($data["referred_by_email"], $data["referred_by"]);
-      $mail->addAddress($to, 'Deepanshu'); // Add a recipient
-      $mail->addReplyTo($data["email"], $data["fullname"]);
+		//attachment file path
+		$file = $_FILES['chooseFile']['tmp_name'];
 
-      //Attachments
-      $mail->addAttachment($_FILES['chooseFile']['tmp_name'], $_FILES['chooseFile']['name']); // Add attachments
-
-      //Content
-      $mail->isHTML(true); // Set email format to HTML
-      $mail->Subject = 'Submission from ' . $data['referred_by'];
-      $mail->Body = 'Hi there,<br/><br/>
-                I am ' . $data["referred_by"] . ' referring my friend who <br/>
-                 have done ' . $data["qualification"] . ' with an experience of ' . $data["experience"] . '.<br/>
+		//email body content
+		$htmlContent = 'Hi there,<br/><br/>
+                I am ' . $data["referred_by"] . ' referring my friend who had done ' . $data["qualification"] . ' with an experience of ' . $data["experience"] . '.<br/>
                 It would be a sincere pleasure to hear back from you soon to discuss the opportunity.<br/>
                 Look at the details below.<br/>
                  ' . $data["fullname"] . '<br/>
                  ' . $data["phone"] . '<br/>
                  ' . $data["email"] . '<br/>';
 
-    if($mail->send()){
-      $res['mail'] = 'Message has been sent';
-    } else{
-      $res['mail'] = 'Message could not be sent. Mailer Error: ';
-    }
+		$headers = "From: $fromName" . " <" . $from . ">";
+		//boundary
+		$semi_rand = md5(time());
+		$mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
 
+		//headers for attachment
+		$headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\"";
 
-      $mail1 = new PHPMailer();
-      //Server settings
-      $mail1->SMTPDebug = 0; // Enable verbose debug output
-      $mail1->isSMTP(); // Set mailer to use SMTP
-      $mail1->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-      $mail1->SMTPAuth = true; // Enable SMTP authentication
-      $mail1->Username = $to; // SMTP username
-      $mail1->Password = 'Deepanshu@24'; // SMTP password
-      $mail1->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
-      $mail1->Port = 587; // TCP port to connect to
+		//multipart boundary
+		$message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" .
+			"Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n";
 
-      $mail1->setFrom($to, 'Deepanshu'); 
-      $mail1->addAddress($data["email"], $data["fullname"]); // Add a recipient
-      $mail1->isHTML(true); // Set email format to HTML
-      $mail1->Subject = 'Response from ApicalJobs';
-      $mail1->Body = 'Hi '. $data["fullname"].',<br/><br/>
-                     Thanks for your job Submission. Our team will review and get back to you shortly. <br/><br/>
-                   Regards,<br/>
-                   Apical Jobs';
-      if($mail1->send()){
-        $res['mail'] = 'Message has been sent';
-      } else{
-        $res['mail'] = 'Message could not be sent. Mailer Error: ';
-      }
-    // //$insertdata = $dbConn->insert('contact', $data);
-    
+		//preparing attachment
+		if (!empty($file) > 0) {
+			if (is_file($file)) {
+				$message .= "--{$mime_boundary}\n";
+				$fp = @fopen($_FILES['chooseFile']['tmp_name'], "rb");
+				$datas = @fread($fp, $_FILES['chooseFile']['size']);
 
-    $res['code'] = 'success';
-    echo (json_encode($res));
-  } else {
-    echo json_encode(array('code' => 'failed', 'fields' => $error_fields));
-  }
+				@fclose($fp);
+				$datas = chunk_split(base64_encode($datas));
+				$message .= "Content-Type: application/octet-stream; name=\"" . $_FILES['chooseFile']['name'] . "\"\n" .
+					"Content-Description: " . $_FILES['chooseFile']['name'] . "\n" .
+					"Content-Disposition: attachment;\n" . " filename=\"" . $_FILES['chooseFile']['name'] . "\"; size=" . $_FILES['chooseFile']['size'] . ";\n" .
+					"Content-Transfer-Encoding: base64\n\n" . $datas . "\n\n";
+			}
+		}
+		$message .= "--{$mime_boundary}--";
+		$returnpath = "-f" . $from;
+
+		//send email
+		$mail = @mail($to, $subject, $message, $headers, $returnpath);
+
+		//email sending status
+		$res['mail'] = $mail ? 'Message has been sent' : "Mail sending failed.";
+
+		// // //$insertdata = $dbConn->insert('contact', $data);
+		$userheaders = "MIME-Version: 1.0" . "\r\n";
+		$userheaders .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+		// Additional headers
+		$userheaders .= 'From: Shashank<chitranshi.shashank74@gmail.com>' . "\r\n";
+		$usersubject = "Response from ApicalJobs";
+		$userto = $data["email"];
+
+		$usersend = 'Hi ' . $data["fullname"] . ',<br/> <br/>Thank you for your interest in  ApicalJobs. <br/>Our ninjas will connect with you shortly in response to your submission.<br/><br/> Warm Regards <br/>Apical Jobs';
+		if (mail($userto, $usersubject, $usersend, $userheaders)):
+			$res['mail'] = 'Email has sent successfully.';
+		else:
+			$res['mail'] = 'Email sending fail.';
+		endif;
+
+		$insertdata = $dbConn->insert('contact', $data);
+
+		$res['code'] = 'success';
+		echo (json_encode($res));
+	} else {
+		echo json_encode(array('code' => 'failed', 'fields' => $error_fields));
+	}
 }
 ?>
