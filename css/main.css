@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Cantarell|Roboto+Slab:400,700');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
 body {
     font-family: 'Cantarell', sans-serif;
     background-color: #f5f6fa;
@@ -48,10 +49,10 @@ header .navbar-default {
 .navbar-brand p {
     color: #fff;
     font-size: 25px;
-    font-weight: 800;
-    padding: 0 20px;
+    padding: 0 10px;
     display: inline-block;
     vertical-align: sub;
+    font-family: 'Lobster', cursive;
 }
 
 .navbar-brand img {
@@ -913,7 +914,8 @@ section.upcoming h3 {
 
 
 /* ********************************File Upload**********************************/
-.upload-btn{
+
+.upload-btn {
     background: #dce4ec;
     padding: 0 10px;
     display: inline-block;
@@ -922,27 +924,32 @@ section.upcoming h3 {
     border-top-right-radius: unset;
     border-bottom-right-radius: unset;
 }
- .group-span-filestyle:hover .upload-btn {
+
+.group-span-filestyle:hover .upload-btn {
     background: #34495e;
-    
     transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
 }
-.group-span-filestyle:hover .buttonText{
+
+.group-span-filestyle:hover .buttonText {
     color: #FFFFFF;
 }
-.buttonText{
+
+.buttonText {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
 }
-.has-error .bootstrap-filestyle .form-control{
+
+.has-error .bootstrap-filestyle .form-control {
     border-color: #dce4ec;
 }
-.bootstrap-filestyle input{
+
+.bootstrap-filestyle input {
     border-color: #dce4ec;
 }
+
 .file-upload {
     display: block;
     text-align: center;
@@ -1242,13 +1249,13 @@ section.upcoming h3 {
 }
 
 #loader {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.75) url(../images/loading.gif) no-repeat center center;
-  z-index: 10000;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75) url(../images/loading.gif) no-repeat center center;
+    z-index: 10000;
 }

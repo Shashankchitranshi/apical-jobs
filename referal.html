@@ -26,7 +26,7 @@
                     </button>
                     <a class="navbar-brand" href="index.html">
                         <img src="images/logo.png" alt="">
-                        <p>Apical Jobs</p>
+                        <p>Jobspah</p>
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -107,16 +107,8 @@
                                     <input type="file" name="chooseFile" id="chooseFile">
                                 </div>
                             </div> -->
-                            <input type="file" name="chooseFile" class="filestyle " data-buttonBefore="true" data-btnClass="upload-btn" id="chooseFile" data-validation="required mime size " 
-                            data-validation-max-size="1M"
-                            data-dragdrop="true"
-                            data-disabled="false"
-                            data-placeholder="No file Chosen"
-                            data-validation-allowing="doc, docx, pdf" 
-                            data-validation-error-msg-required="You have not selected any file to upload" 
-                            data-validation-error-msg-size="You can not upload file larger than 1MB"
-                            data-validation-error-msg-mime="You can only upload pdf and word file"
-                            >
+                            <input type="file" name="chooseFile" class="filestyle " data-buttonBefore="true" data-btnClass="upload-btn" id="chooseFile" data-validation="required mime size " data-validation-max-size="1M" data-dragdrop="true" data-disabled="false" data-placeholder="No file Chosen"
+                                data-validation-allowing="doc, docx, pdf" data-validation-error-msg-required="You have not selected any file to upload" data-validation-error-msg-size="You can not upload file larger than 1MB" data-validation-error-msg-mime="You can only upload pdf and word file">
                         </div>
                     </div>
                 </div>
@@ -210,7 +202,7 @@
         phoneMask.updateValue();
 
         $.validate({
-            modules : 'file',
+            modules: 'file',
             form: '#refer-us',
             onSuccess: function($form) {
                 spinner.show();
