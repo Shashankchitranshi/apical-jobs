@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Cantarell|Roboto+Slab:400,700');
-@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
 body {
     font-family: 'Cantarell', sans-serif;
     background-color: #f5f6fa;
@@ -48,11 +48,11 @@ header .navbar-default {
 
 .navbar-brand p {
     color: #fff;
-    font-size: 25px;
-    padding: 0 10px;
+    font-size: 32px;
+    padding: 0 15px;
     display: inline-block;
     vertical-align: sub;
-    font-family: 'Lobster', cursive;
+    font-family: 'Great Vibes', cursive;
 }
 
 .navbar-brand img {
