@@ -156,10 +156,10 @@ if (!empty($_POST)) {
 
 		// Additional headers
 		$userheaders .= 'From: Shashank<chitranshi.shashank74@gmail.com>' . "\r\n";
-		$usersubject = "Response from ApicalJobs";
+		$usersubject = "Response from Jobspah.com";
 		$userto = $data["email"];
 
-		$usersend = 'Hi ' . $data["fullname"] . ',<br/> <br/>Thank you for your interest in  ApicalJobs. <br/>Our ninjas will connect with you shortly in response to your submission.<br/><br/> Warm Regards <br/>Apical Jobs';
+		$usersend = 'Hi ' . $data["fullname"] . ',<br/> <br/>Thank you for your interest in  Jobspah.com. <br/>Our ninjas will connect with you shortly in response to your submission.<br/><br/> Warm Regards <br/>Jobspah.com';
 		if (mail($userto, $usersubject, $usersend, $userheaders)):
 			$res['mail'] = 'Email has sent successfully.';
 		else:
