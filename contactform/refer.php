@@ -24,6 +24,8 @@ $dbConn = new Database();
 $data = array('addedOn' => date('Y-m-d H:i:s', time()));
 
 if (!empty($_POST)) {
+	$expected = isset($_POST['salary']) && !empty(trim($_POST['salary'])) ? "Expected:- " . $_POST['salary'] : "N/A";
+	$employer = isset($_POST['employer']) && !empty(trim($_POST['employer'])) ? "Last Employer:- " . $_POST['employer'] : "N/A";
 	$error_fields = array();
 	$email_content = array();
 	foreach ($fields AS $field) {
@@ -104,6 +106,8 @@ if (!empty($_POST)) {
 		//email body content
 		$htmlContent = 'Hi there,<br/><br/>
                 I am ' . $data["referred_by"] . ' referring my friend who had done ' . $data["qualification"] . ' with an experience of ' . $data["experience"] . '.<br/>
+                <br/>' . $expected . '
+								               <br/>' . $employer . '<br/>
                 It would be a sincere pleasure to hear back from you soon to discuss the opportunity.<br/>
                 Look at the details below.<br/>
                  ' . $data["fullname"] . '<br/>

@@ -22,6 +22,8 @@ $dbConn = new Database();
 $data = array('addedOn' => date('Y-m-d H:i:s', time()));
 
 if (!empty($_POST)) {
+	$expected = isset($_POST['salary']) && !empty(trim($_POST['salary'])) ? "Expected:- " . $_POST['salary'] : "N/A";
+	$employer = isset($_POST['employer']) && !empty(trim($_POST['employer'])) ? "Last Employer:- " . $_POST['employer'] : "N/A";
 	$error_fields = array();
 	$email_content = array();
 	foreach ($fields AS $field) {
@@ -101,8 +103,8 @@ if (!empty($_POST)) {
 		$file = $_FILES['chooseFile']['tmp_name'];
 
 		//email body content
-		$htmlContent = 'Hi , <br/>I have done ' . $data["qualification"] . ' with an experience of ' . $data["experience"] . '.  It would be a sincere pleasure to hear back from you soon to discuss the opportunity.<br/><br/>
-								               Regards,<br/>
+		$htmlContent = 'Hi , <br/>I have done ' . $data["qualification"] . ' with an experience of ' . $data["experience"] . '.  It would be a sincere pleasure to hear back from you soon to discuss the opportunity.<br/>' . $expected . '
+								               <br/>' . $employer . '<br/><br/>Regards,<br/>
 								               ' . $data["fullname"] . '<br/>
 								               ' . $data["phone"] . '<br/>
 								               ' . $data["email"] . '<br/><br/><br/>';
