@@ -1081,7 +1081,23 @@ section.upcoming h3 {
     min-height: calc(100vh - 66px);
     margin-bottom: 0px;
 }
-
+.career-detail h5 {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 13px 0 0;
+}
+.career-detail li {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 10px;
+    word-spacing: 2px;
+    padding: 10px 0;
+    color: #012e4e;
+}
+.pad60{
+    padding: 60px;
+}
 @media (max-width: 767px) {
     .navbar-brand {
         padding: 3px;
@@ -1212,6 +1228,18 @@ section.upcoming h3 {
     .register {
         padding: 6px 33px;
         font-size: 15px;
+    }
+    .career-detail h5 {
+        font-size: 14px;
+        margin: 0;
+    }
+    .career-detail li {
+        font-size: 12px;
+        line-height: 17px;
+        padding: 5px 0;
+    }
+    .pad60 {
+        padding: 20px;
     }
 }
 
